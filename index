@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+	<title>有多远滚多远</title>
+	
+	<!-- Allow fullscreen mode on iOS devices. (These are Apple specific meta tags.) -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="HandheldFriendly" content="true">
+	
+	<!-- Chrome for Android web app tags -->
+	<meta name="mobile-web-app-capable" content="yes">
+
+    <!-- All margins and padding must be zero for the canvas to fill the screen. -->
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		html, body {
+			background: #000;
+			color: #fff;
+			overflow: hidden;
+			touch-action: none;
+			-ms-touch-action: none;
+		}
+		canvas {
+			touch-action-delay: none;
+			touch-action: none;
+			-ms-touch-action: none;
+		}
+		.green {
+		color: #e8f0de;
+		border: solid 1px #538312;
+		background: #64991e;
+		background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+		background: -moz-linear-gradient(top, #7db72f, #4e7d0e);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+		}
+		.blue {
+		color: #d9eef7;
+		border: solid 1px #0076a3;
+		background: #0095cd;
+		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+		background: -moz-linear-gradient(top, #00adee, #0078a5);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+		}
+		.button {
+		display: inline-block;
+		zoom: 1;
+		vertical-align: baseline;
+		margin: 0 2px;
+		outline: none;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		font: 16px/100% Arial, Helvetica, sans-serif;
+		padding: .5em 2em .55em;
+		text-shadow: 0 1px 1px rgba(0,0,0,.3);
+		-webkit-border-radius: .5em;
+		-moz-border-radius: .5em;
+		border-radius: .5em;
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		}
+
+    </style>
+	<link rel="stylesheet" href="css/1758.css">
+	<script src="//hm.baidu.com/hm.js?7f70df09d6dc5f12842a518bf47a9e14"></script><script src="JS/util.js?20140826"></script>
+	<script src="js/tinybox.js"></script>
+	<script>
+			var _hmt = _hmt || [];
+						
+			(function() {
+			  var hm = document.createElement("script");
+			  hm.src = "//hm.baidu.com/hm.js?7f70df09d6dc5f12842a518bf47a9e14";
+			  var s = document.getElementsByTagName("script")[0]; 
+			  s.parentNode.insertBefore(hm, s);
+			})();
+			</script>
+</head>
+<body>
+<input id="bt-game-id" type="hidden" value="17-jsfq">
+
+<div id="fb-root"></div>
+	<script>
+	// Issue a warning if trying to preview an exported project on disk.
+	(function(){
+		// Check for running exported on file protocol
+		if (window.location.protocol.substr(0, 4) === "file")
+		{
+			alert("Exported games won't work until you upload them. (When running on the file:/// protocol, browsers block many features from working for security reasons.)");
+		}
+	})();
+	</script>
+	
+	<!-- The canvas must be inside a div called c2canvasdiv -->
+	<div id="c2canvasdiv" style="width: 320px; height: 480px; margin-left: 0px; margin-top: 0px;">
+	
+		<!-- The canvas the project will render to.  If you change its ID, don't forget to change the
+		ID the runtime looks for in the jQuery events above (ready() and cr_sizeCanvas()). -->
+		<canvas id="c2canvas" width="640" height="960" style="width: 320px; height: 480px;">
+			<!-- This text is displayed if the visitor's browser does not support HTML5.
+			You can change it, but it is a good idea to link to a description of a browser
+			and provide some links to download some popular HTML5-compatible browsers. -->
+			<h1>Your browser does not appear to support HTML5.  Try upgrading your browser to the latest version.  <a href="http://www.whatbrowser.org">What is a browser?</a>
+			<br><br><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Microsoft Internet Explorer</a><br>
+			<a href="http://www.mozilla.com/firefox/">Mozilla Firefox</a><br>
+			<a href="http://www.google.com/chrome/">Google Chrome</a><br>
+			<a href="http://www.apple.com/safari/download/">Apple Safari</a><br>
+			<a href="http://www.google.com/chromeframe">Google Chrome Frame for Internet Explorer</a><br></h1>
+		</canvas>
+		
+	</div>
+	
+	<!-- Pages load faster with scripts at the bottom -->
+	<div id="share" style="display: none;background:rgba(0,0,0,0.8); position:absolute;top:0px;left:0px;width:100%;	height:100%;z-index:10000;"><img src="http://images.1758.com/images/share_arrow.png" id="share-wx-img" style="max-width: 280px; padding-right: 25px;float: right;">
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+<p id="share_text" style="text-align:center; width: 70%; color: rgb(255, 255, 255); padding-top: 5px; margin: 0px auto; font: bold 24px"></p>
+	<p style="text-align: center; margin: 16px;"><img id="share_img" style="height:60px;" src="">
+	<br><a href="javascript:resumeGame();"><button class="button blue">再滚一把</button></a></p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+<!--	<p style="text-align: center; margin: 16px;"><a href="http://i1758.cn/ygys/?f=jisufeiqiu"><button class="button blue">愚公移山</button></a></p> -->
+	<p>&nbsp;</p>
+<!--	<p style="text-align: center; margin: 16px;"><a href="javascript:more('jisufeiqiu');"><button class="button blue">更多游戏</button></a></p>-->
+	<p>&nbsp;</p>
+	<p style="text-align: center; margin: 16px;"><a href="javascript:shareDL();"><img src="http://images.1758.com/images/start.png" id="wx-qr-img" style="max-width: 210px;"><br><button class="button green">立即启动</button></a></p>
+		</div>
+	<script>
+		function showShare(shareTip, shareImg){
+			document.getElementById("share_text").innerHTML=shareTip ;
+			document.getElementById("share_img").src=shareImg ;
+			document.getElementById("share").style.display="";	
+		}
+		function resumeGame(){
+			document.getElementById('share').style.display='none';
+		}
+		function shareDL(){
+		   _hmt.push(['_trackEvent', 'games', 'download', '1758WxClient_dl_share']);
+		  $.ajax({type:"get",url:"http://115.28.221.90/game-count/game/count?appId=1758WxClient_dl_share",dataType:"jsonp"});
+		  
+		  if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
+			_hmt.push(['_trackEvent', 'games', 'download', '1758WxClient_dl_share_ios']);
+			 $.ajax({type:"get",url:"http://115.28.221.90/game-count/game/count?appId=1758WxClient_dl_share_ios",dataType:"jsonp"});
+		 
+			
+			location.href='http://fir.im/1758';
+		  }else{
+			_hmt.push(['_trackEvent', 'games', 'download', '1758WxClient_dl_share_android']);
+			
+			 $.ajax({type:"get",url:"http://115.28.221.90/game-count/game/count?appId=1758WxClient_dl_share_android",dataType:"jsonp"});
+			 
+		  location.href="http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=10959277&from=wx&isTimeline=false&actionFlag=0&params=pname%3Dcn.hlmy.wxgame%26versioncode%3D17%26actionflag%3D0%26channelid%3DANDROIDQQ";
+		  }
+		}
+</script>	
+		
+		
+	<script src="js/jquery-2.0.0.min.js"></script>
+	<script src="js/perlin.js"></script>
+
+	
+    <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
+    This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
+	<script src="js/c2runtime.js"></script>
+
+    <script>
+		// Size the canvas to fill the browser viewport.
+		jQuery(window).resize(function() {
+			cr_sizeCanvas(jQuery(window).width(), jQuery(window).height());
+		});
+		
+		// Start the Construct 2 project running on window load.
+		jQuery(document).ready(function ()
+		{			
+			// Create new runtime using the c2canvas
+			cr_createRuntime("c2canvas");
+		});
+		
+		// Pause and resume on page becoming visible/invisible
+		function onVisibilityChanged() {
+			if (document.hidden || document.mozHidden || document.webkitHidden || document.msHidden)
+				cr_setSuspended(true);
+			else
+				cr_setSuspended(false);
+		};
+		
+		document.addEventListener("visibilitychange", onVisibilityChanged, false);
+		document.addEventListener("mozvisibilitychange", onVisibilityChanged, false);
+		document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
+		document.addEventListener("msvisibilitychange", onVisibilityChanged, false);
+		
+    </script>	
+	
+	<script language="javascript">
+	    var suffix=Math.floor(Math.random()*500000);
+					
+	
+		Date.prototype.format=function(format){var o={"M+":this.getMonth()+1,"d+":this.getDate(),"h+":this.getHours(),"m+":this.getMinutes(),"s+":this.getSeconds(),"q+":Math.floor((this.getMonth()+3)/3),"S":this.getMilliseconds()};if(/(y+)/.test(format)){format=format.replace(RegExp.$1,(this.getFullYear()+"").substr(4-RegExp.$1.length))};for(var k in o){if(new RegExp("("+k+")").test(format)){format=format.replace(RegExp.$1,RegExp.$1.length==1?o[k]:("00"+o[k]).substr((""+o[k]).length))}};return format};
+var rnd=Math.floor(Math.random()*50000);
+var _domain=new Date().format('yyyyMMddhh')+".games."+rnd+".ai1758.cn";
+
+
+		window.shareData = {
+		        "imgUrl": "http://file-image.qiniudn.com/images/jisufeiqiu_icon.png",
+		        "timeLineLink": "http://www."+_domain+"/hlmy/wxgame/jisufeiqiu"+suffix+".htm",
+		        "tTitle": "有多远滚多远",
+		        "tContent": "看你能滚多远"
+		};
+				
+		function onShareComplete(){
+			$.ajax({type:"get",	url:"http://api.1758.com/game-count/game/count?appId=share_gunduoyuan",dataType:"jsonp"});
+		}
+		
+		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		    
+		    WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+		        WeixinJSBridge.invoke('sendAppMessage', {
+		            "img_url": window.shareData.imgUrl,
+		            "link": window.shareData.timeLineLink,
+		            "desc": window.shareData.tContent,
+		            "title": window.shareData.tTitle
+		        }, onShareComplete);
+		    });
+
+		    WeixinJSBridge.on('menu:share:timeline', function(argv) {
+		        WeixinJSBridge.invoke('shareTimeline', {
+		            "img_url": window.shareData.imgUrl,
+		            "img_width": "640",
+		            "img_height": "640",
+		            "link": window.shareData.timeLineLink,
+		            "desc": window.shareData.tContent,
+		            "title": window.shareData.tTitle
+		        }, onShareComplete);
+		    });
+		}, false);
+		
+		function share(tip,title){
+			document.title=title;
+			window.shareData.tTitle = document.title;
+			showShare(tip,"http://images.1758.com/images/jisufeiqiu_icon.png");
+		}
+		function sendScore(score) {
+			var maxScore;
+			
+			
+			if(-1==score){//挑战朋友按钮
+				if (window.thisScore>0){
+					var percent=Math.min(Math.floor((Math.pow((window.thisScore/300),1.0/8))*100),100);
+					share("恭喜你，滚了<span style='color:orange'>"+window.thisScore+"</span>米，超过了<span style='color:orange'>"+percent+"%</span>的玩家，快向小伙伴炫耀一下吧！","我在《有多远滚多远》中，滚了"+window.thisScore+"米，谁能滚得比我远！");	
+				}else{
+					share("你竟然滚了<span style='color:orange'>"+window.thisScore+"</span>米，真是玩家中的极品,快向小伙伴炫耀一下吧！","我在《有多远滚多远》中，滚了"+window.thisScore+"米，谁能滚得比我远！");	
+				}		
+			}else{
+				window.thisScore=score;
+				maxScore=window.preMaxScore
+				maxScore=parseInt(maxScore?maxScore:0);
+				var percent=Math.min(Math.floor((Math.pow((window.thisScore/300),1.0/8))*100),100);
+				if (window.thisScore>0){
+					if(score>maxScore && maxScore>0){
+						window.preMaxScore=score;
+						share("恭喜你，滚了<span style='color:orange'>"+window.thisScore+"</span>米，刷新了最高记录，超过了<span style='color:orange'>"+percent+"%</span>的玩家，快向小伙伴炫耀一下吧！","我在《有多远滚多远》中，滚了"+window.thisScore+"米，谁能滚得比我远！");	
+					}else{
+						window.preMaxScore=localStorage.TTBHighscore;
+						share("恭喜你，滚了<span style='color:orange'>"+window.thisScore+"</span>米，超过了<span style='color:orange'>"+percent+"%</span>的玩家，快向小伙伴炫耀一下吧！","我在《有多远滚多远》中，滚了"+window.thisScore+"米，谁能滚得比我远！");	
+					}
+				}else{
+					share("你竟然滚了<span style='color:orange'>"+window.thisScore+"</span>米，真是玩家中的极品,快向小伙伴炫耀一下吧！","我在《有多远滚多远》中，滚了"+window.thisScore+"米，谁能滚得比我远！");	
+				}
+			}
+		}
+		</script>
+
+ 
+
+
+</body></html>
